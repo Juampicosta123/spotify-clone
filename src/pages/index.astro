@@ -4,15 +4,17 @@ import Layout from '../layouts/Layout.astro';
 import { playlists } from '@/lib/data';
 import PlaylistSquareCard from '@/components/PlaylistSquareCard.astro';
 import Greeting from '@/components/Greeting.astro';
+import Header from '@/components/Header.astro';
+
 const recent = playlists.slice(0, 6);
 ---
 
 <Layout title='Spotify Clone' description='Spotify clone using Tailwind'>
   <div
     id='playlist-container'
-    class='relative transition-all duration-1000 bg-green-600'
+    class='relative transition-all duration-1000 bg-green-600/50'
   >
-    <!--<PageHeader /> -->
+    <Header />
 
     <div class='relative z-10 px-6 pt-10'>
       <Greeting />

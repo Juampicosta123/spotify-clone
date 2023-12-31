@@ -1,18 +1,8 @@
 import { usePlayerStore } from '@/store/playerStore';
 import { Slider } from '@/components/Slider';
 import { useRef, useEffect, useState } from 'react';
-
-export const Play = () => (
-  <svg width='16' height='16' role='img' aria-hidden='true' viewBox='0 0 16 16'>
-    <path d='M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z'></path>
-  </svg>
-);
-
-export const Pause = () => (
-  <svg width='16' height='16' role='img' aria-hidden='true' viewBox='0 0 16 16'>
-    <path d='M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z'></path>
-  </svg>
-);
+import { Pause } from '@/icons/Pause';
+import { Play } from '@/icons/Play';
 
 export const VolumeSilence = () => (
   <svg
@@ -143,7 +133,7 @@ const VolumeControl = () => {
   };
 
   return (
-    <div className='flex justify-center gap-x-2 px-4 text-white'>
+    <div className='flex justify-center gap-x-2 px-8 text-white'>
       <button
         className='opacity-70 hover:opacity-100 transition'
         onClick={handleClickVolumen}
@@ -182,9 +172,9 @@ export function Player() {
   }, [volume]);
 
   useEffect(() => {
-    const { song, playlist, songs } = currentMusic;
+    const { song } = currentMusic;
     if (song) {
-      const src = `/music/${playlist.id}/0${song.id}.mp3`;
+      const src = `/music/0${song.id}.mp3`;
       audioRef.current.src = src;
       audioRef.current.volume = volume;
       audioRef.current.play();
@@ -204,7 +194,11 @@ export function Player() {
       <div className='grid place-content-center gap-4 flex-1'>
         <div className='flex justify-center flex-col items-center'>
           <button onClick={handleClick} className='bg-white rounded-full p-2'>
-            {isPlaying ? <Pause /> : <Play />}
+            {isPlaying ? (
+              <Pause className='w-5 h-5 text-black' />
+            ) : (
+              <Play className='w-5 h-5 text-black' />
+            )}
           </button>
           <SongControl audio={audioRef} />
         </div>

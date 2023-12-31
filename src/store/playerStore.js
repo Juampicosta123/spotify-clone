@@ -6,5 +6,7 @@ export const usePlayerStore = create(set => ({
     setIsPlaying: (isPlaying) => set({isPlaying}),
     setCurrentMusic: currentMusic => set({currentMusic}),
     volume: 1,
-    setVolume: volume => set({volume})
+    setVolume: volume => set({volume}),
+    random: false,
+    setRandom: random => set({random})
 }))
