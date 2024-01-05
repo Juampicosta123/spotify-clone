@@ -8,5 +8,7 @@ export const usePlayerStore = create(set => ({
     volume: 1,
     setVolume: volume => set({volume}),
     random: false,
-    setRandom: random => set({random})
+    setRandom: random => set({random}),
+    queue: null,
+    setQueue: queue => set({queue}),
 }))

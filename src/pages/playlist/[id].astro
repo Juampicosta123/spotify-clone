@@ -1,68 +1,85 @@
 ---
 import { SongsTable } from '@/components/SongsTable.jsx';
 import Layout from '../../layouts/Layout.astro';
-import { allPlaylists, songs } from '@/lib/data';
+import { type Song } from '@/lib/data';
 import { CardPlayButton } from '@/components/CardPlayButton';
 import { RandomPlayButton } from '@/components/RandomPlayButton';
+import Header from '@/components/Header.astro';
+import { getPlaylist } from '@/services/playlist';
+import { formatTime } from '@/utils/formatTime';
 
 const { id } = Astro.params;
 
-const playlist = allPlaylists.find((playlist) => playlist.id === id);
-const playlistSongs = songs.filter(
-  (song) => song.albumId === playlist?.albumId
-);
+const response = await getPlaylist({ id });
+const playlist = response.data;
+
+function sumarHoras(array: Song[]) {
+  let suma = 0;
+  let result;
+
+  for (var i = 0; i < array?.length; i++) {
+    const duration = parseInt(array[i].duration);
+    suma += duration;
+  }
+  if (suma / 60 >= 0) {
+    return (result = Math.round(suma / 60) + 'm');
+  } else {
+    return (result = Math.round(suma) + 's');
+  }
+}
+
+const playlistSongs = playlist?.songs;
+
+const duration = sumarHoras(playlistSongs);
+
+const colorBg = playlist?.color;
 ---
 
 <Layout title='Spotify Clone' description='Spotify clone using Tailwind'>
   <div
     id='playlist-container'
-    class='relative flex flex-col transition-all duration-1000 bg-green-600 overflow-x-hidden pt-10'
-    transition:name=`playlist ${id} box`
+    class={`relative flex flex-col transition-all duration-1000 overflow-x-hidden `}
+    transition:name=`playlist ${id} horizontal box`
+    style={`background-color: ${colorBg}`}
   >
-    <header class='flex flex-col gap-8 px-6'>
+    <Header />
+    <header class='flex flex-col gap-8 px-6 pt-10'>
       <div class='flex gap-8 px-6 items-end'>
         <picture class='aspect-square size-60 flex-none'>
           <img
-            src={playlist?.cover}
+            src={playlist?.imagelink}
             alt={`Cover of ${playlist?.title}`}
             class='object-cover size-full shadow-lg'
-            transition:name={`playlist ${id} image`}
+            transition:name=`playlist ${id} image horizontal`
           />
         </picture>
         <div class='flex flex-col gap-3'>
           <span class='text-sm'>Playlist</span>
           <h1
             class='text-6xl font-bold text-white'
-            transition:name={`playlist ${id} title`}
+            transition:name=`playlist ${id} title horizontal`
           >
             {playlist?.title}
           </h1>
           <span class='mt-3 text-sm'>
             <span class='font-semibold'
-              >{playlist?.owner} · {playlistSongs.length} canciones,</span
+              >{playlist?.owner} · {playlistSongs?.length} canciones,</span
             >
-            <span class='text-gray-100'>cerca de 18h</span>
+            <span class='text-gray-100'>cerca de {duration}</span>
           </span>
         </div>
       </div>
       <div class='flex gap-x-8'>
-        <CardPlayButton
-          client:load
-          id={id}
-          albumId={playlist?.albumId}
-          size='large'
-        />
+        <CardPlayButton client:load playlist={playlist} size='large' />
         <RandomPlayButton client:load />
       </div>
     </header>
-
-    <!--<div class='relative z-10 px-6 pt-10'></div> -->
     <div
       class='absolute -z-10 inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80'
     >
     </div>
     <section class='p-6'>
-      <SongsTable client:load songs={playlistSongs} />
+      <SongsTable playlist={playlist} client:load songs={playlistSongs} />
     </section>
   </div>
 </Layout>

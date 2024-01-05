@@ -1,10 +1,15 @@
 ---
 import PlaylistHorizontalCard from '@/components/PlaylistHorizontalCard.astro';
 import Layout from '../layouts/Layout.astro';
-import { playlists } from '@/lib/data';
 import PlaylistSquareCard from '@/components/PlaylistSquareCard.astro';
 import Greeting from '@/components/Greeting.astro';
 import Header from '@/components/Header.astro';
+
+const playlists = await fetch(`http://localhost:3000/api/playlist/`, {
+  method: 'GET'
+})
+  .then((res) => res.json())
+  .then((data) => data.data);
 
 const recent = playlists.slice(0, 6);
 ---
@@ -15,8 +20,7 @@ const recent = playlists.slice(0, 6);
     class='relative transition-all duration-1000 bg-green-600/50'
   >
     <Header />
-
-    <div class='relative z-10 px-6 pt-10'>
+    <div class='relative z-10 px-6 pt-1'>
       <Greeting />
 
       <div

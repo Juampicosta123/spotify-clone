@@ -4,7 +4,7 @@ import { usePlayerStore } from '@/store/playerStore';
 export function RandomPlayButton() {
   const { random, setRandom } = usePlayerStore((state) => state);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setRandom(!random);
   };
 

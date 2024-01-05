@@ -2,32 +2,54 @@ import { useEffect, useState } from 'react';
 import { usePlayerStore } from '@/store/playerStore';
 import { Pause } from '@/icons/Pause';
 import { Play } from '@/icons/Play';
+import { createQueue } from '../services/queue';
 
-export function CardPlayButton({ id, albumId, size = 'small' }) {
-  const { currentMusic, isPlaying, setIsPlaying, setCurrentMusic, random } =
+export function CardPlayButton({ playlist, size = 'small' }) {
+  const { currentMusic, isPlaying, setIsPlaying, random, queue, setQueue } =
     usePlayerStore((state) => state);
   const [isPlayingPlaylist, setIsPlayingPlaylist] = useState(
-    isPlaying && currentMusic?.song.albumId === albumId
+    isPlaying && queue?.song?.albumId === playlist?._id
   );
 
-  const handleClick = () => {
-    if (isPlayingPlaylist) {
-      setIsPlaying(false);
+  const handleClick = async () => {
+    if (queue?.song?._id === playlist?._id) {
+      setIsPlaying(!isPlaying);
       return;
     }
-    const randomParam = random ? true : false;
-    fetch(`/api/get-info-playlist.json?id=${id}&random=${randomParam}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { songs, playlist, song } = data;
+    try {
+      let newQueue;
+      if (queue) {
+        if (queue?.from !== playlist?._id) {
+          newQueue = await createQueue({
+            from: playlist._id,
+            fromType: 'Playlist',
+            random
+          });
+        } else {
+          setIsPlaying(!isPlaying);
+          return;
+        }
+      } else {
+        newQueue = await createQueue({
+          from: playlist._id,
+          fromType: 'Playlist',
+          random
+        });
+      }
 
-        setIsPlaying(true);
-        setCurrentMusic({ songs, playlist, song });
-      });
+      setQueue(newQueue);
+
+      setIsPlaying(true);
+      localStorage.setItem('currentMusic', JSON.stringify(queue));
+    } catch (error) {
+      console.error('Error fetching queue:', error);
+    }
   };
 
   useEffect(() => {
-    setIsPlayingPlaylist(isPlaying && currentMusic?.song.albumId === albumId);
+    setIsPlayingPlaylist(
+      isPlaying && currentMusic?.song?.albumId === playlist?._id
+    );
   }, [currentMusic, isPlaying]);
 
   const btnClassName = size === 'small' ? 'p-4' : 'p-5';

@@ -1,13 +1,23 @@
 import { colors } from './colors';
 
 export interface Playlist {
-  id: string;
-  albumId: number;
+  _id: string;
   title: string;
   color: (typeof colors)[keyof typeof colors];
-  cover: string;
+  imagelink: string;
   owner: string;
   artists: string[];
+  songs?: Song[];
+}
+
+export interface Song {
+  _id: number;
+  albumId: number;
+  title: string;
+  image: string;
+  artists: string[];
+  album: string;
+  duration: string;
 }
 
 export const playlists: Playlist[] = [
@@ -85,16 +95,6 @@ export const allPlaylists = [
   ...sidebarPlaylists
 ];
 
-export interface Song {
-  id: number;
-  albumId: number;
-  title: string;
-  image: string;
-  artists: string[];
-  album: string;
-  duration: string;
-}
-
 export const songs: Song[] = [
   {
     id: 1,
@@ -103,7 +103,7 @@ export const songs: Song[] = [
     image: `https://vinyl.lofirecords.com/cdn/shop/products/VINYL_MORNING_COFFEE_4-min.png?v=1680526353`,
     artists: ['LoFi Dreamer'],
     album: 'Chill Lo-Fi Music',
-    duration: '3:12'
+    duration: '2:57'
   },
   {
     id: 2,
@@ -112,7 +112,7 @@ export const songs: Song[] = [
     image: `https://vinyl.lofirecords.com/cdn/shop/products/VINYL_MORNING_COFFEE_4-min.png?v=1680526353`,
     artists: ['LoFi Dreamer'],
     album: 'Chill Lo-Fi Music',
-    duration: '4:07'
+    duration: '3:40'
   },
   {
     id: 3,
@@ -121,7 +121,7 @@ export const songs: Song[] = [
     image: `https://vinyl.lofirecords.com/cdn/shop/products/VINYL_MORNING_COFFEE_4-min.png?v=1680526353`,
     artists: ['LoFi Dreamer'],
     album: 'Chill Lo-Fi Music',
-    duration: '3:50'
+    duration: '3:30'
   },
   {
     id: 4,
@@ -130,7 +130,7 @@ export const songs: Song[] = [
     image: `https://vinyl.lofirecords.com/cdn/shop/products/VINYL_MORNING_COFFEE_4-min.png?v=1680526353`,
     artists: ['LoFi Dreamer'],
     album: 'Chill Lo-Fi Music',
-    duration: '3:30'
+    duration: '2:12'
   },
   {
     id: 5,
@@ -139,7 +139,7 @@ export const songs: Song[] = [
     image: `https://vinyl.lofirecords.com/cdn/shop/products/VINYL_MORNING_COFFEE_4-min.png?v=1680526353`,
     artists: ['LoFi Dreamer'],
     album: 'Chill Lo-Fi Music',
-    duration: '4:20'
+    duration: '2:26'
   },
   {
     id: 6,
@@ -148,7 +148,7 @@ export const songs: Song[] = [
     image: `https://vinyl.lofirecords.com/cdn/shop/files/2amsynth-vinyl.png?v=1693312187`,
     artists: ['Urban Nocturne'],
     album: 'Midnight Tales',
-    duration: '3:40'
+    duration: '2:38'
   },
   {
     id: 7,
@@ -157,7 +157,7 @@ export const songs: Song[] = [
     image: `https://vinyl.lofirecords.com/cdn/shop/files/2amsynth-vinyl.png?v=1693312187`,
     artists: ['Urban Nocturne'],
     album: 'Midnight Tales',
-    duration: '3:20'
+    duration: '2:40'
   },
   {
     id: 8,
@@ -166,7 +166,7 @@ export const songs: Song[] = [
     image: `https://vinyl.lofirecords.com/cdn/shop/files/2amsynth-vinyl.png?v=1693312187`,
     artists: ['Urban Nocturne'],
     album: 'Midnight Tales',
-    duration: '3:50'
+    duration: '2:54'
   },
   {
     id: 9,

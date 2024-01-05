@@ -2,20 +2,22 @@ import { usePlayerStore } from '@/store/playerStore';
 import { SongInfo } from './SongInfo.jsx';
 import { useEffect, useState } from 'react';
 import { SongTableItemPlayButton } from './SongTableItemPlayButton.jsx';
+import { formatTime } from '@/utils/formatTime.jsx';
 
-export function SongTableItem({ song, index }) {
+export function SongTableItem({ song, index, playlist }) {
   const [isPlayingSong, setIsPlayingSong] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
-  const { isPlaying, currentMusic } = usePlayerStore((state) => state);
+  const { isPlaying, queue } = usePlayerStore((state) => state);
 
   useEffect(() => {
-    const { song: currentSong } = currentMusic;
-
-    if (isPlaying && currentSong?.id === song?.id) {
+    const currentSong = queue?.currentSong;
+    if (isPlaying && currentSong?._id === song?._id) {
       setIsPlayingSong(true);
+    } else {
+      setIsPlayingSong(false);
     }
-  }, [currentMusic]);
+  }, [queue]);
 
   const playingSongClassName = isPlayingSong ? 'text-green-500' : '';
 
@@ -26,7 +28,7 @@ export function SongTableItem({ song, index }) {
       className='border-separate text-gray-400 border-spacing-0  text-sm hover:bg-white/10'
     >
       <td
-        className={`${playingSongClassName} px-4 py-2 font-light rounded-tl-lg rounded-bl-lg w-1`}
+        className={`${playingSongClassName} px-4 py-2 font-light rounded-tl-lg rounded-bl-lg`}
       >
         <span
           style={{
@@ -36,14 +38,19 @@ export function SongTableItem({ song, index }) {
           {index + 1}
         </span>
 
-        <SongTableItemPlayButton isHovered={isHovered} id={song?.id} />
+        <SongTableItemPlayButton
+          playlist={playlist}
+          albumId={song?.albumId}
+          isHovered={isHovered}
+          song={song}
+        />
       </td>
       <td className='px-4 py-2 font-light'>
-        <SongInfo client:load {...song} isPlayingSong={isPlayingSong} />
+        <SongInfo {...song} isPlayingSong={isPlayingSong} />
       </td>
       <td className='px-4 py-2 font-light'>{song?.album}</td>
       <td className='px-4 py-2 font-light rounded-tr-lg rounded-br-lg'>
-        {song?.duration}
+        {formatTime (song?.duration)}
       </td>
     </tr>
   );

@@ -2,38 +2,61 @@ import { useEffect, useState } from 'react';
 import { usePlayerStore } from '@/store/playerStore';
 import { Pause } from '@/icons/Pause';
 import { Play } from '@/icons/Play';
+import { createQueue } from '@/services/queue';
 
-export function SongTableItemPlayButton({ id, size = 'small', isHovered }) {
-  const { currentMusic, isPlaying, setIsPlaying, setCurrentMusic } =
-    usePlayerStore((state) => state);
+export function SongTableItemPlayButton({ song, isHovered, playlist }) {
+  const {
+    currentMusic,
+    isPlaying,
+    setIsPlaying,
+    setCurrentMusic,
+    random,
+    queue,
+    setQueue
+  } = usePlayerStore((state) => state);
   const [isPlayingPlaylist, setIsPlayingPlaylist] = useState(
-    isPlaying && currentMusic?.playlist?.id === id
+    isPlaying && currentMusic?.playlist?._id === song?._id
   );
 
-  const handleClick = () => {
-    setIsPlayingPlaylist((prevIsPlayingPlaylist) => {
-      if (prevIsPlayingPlaylist) {
-        setIsPlaying(false);
-        return false;
-      }
-
-      fetch(`/api/get-song.json?id=${id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          const { song } = data;
-          setIsPlaying(true);
-          setCurrentMusic({ songs: null, playlist: null, song });
-        })
-        .catch((error) => {
-          console.error('Error fetching song:', error);
+  const handleClick = async () => {
+    if (
+      currentMusic?.song?.albumId === playlist._id &&
+      currentMusic?.song?._id === song?._id
+    ) {
+      setIsPlaying(!isPlaying);
+      return;
+    }
+    try {
+      let newQueue;
+      if (!queue) {
+        newQueue = await createQueue({
+          from: playlist._id,
+          fromType: 'Playlist',
+          random,
+          songId: song?._id
         });
-
-      return true;
-    });
+      } else if (queue.currentSong._id === song._id) {
+        newQueue = queue;
+      } else if (queue.currentSong._id !== song._id) {
+        newQueue = await createQueue({
+          from: playlist._id,
+          fromType: 'Playlist',
+          random,
+          songId: song?._id
+        });
+      }
+      setQueue(newQueue);
+      setIsPlaying(true);
+      localStorage.setItem('currentMusic', JSON.stringify(queue));
+    } catch (error) {
+      console.error('Error fetching queue:', error);
+    }
   };
 
   useEffect(() => {
-    setIsPlayingPlaylist(isPlaying && currentMusic?.playlist?.id === id);
+    setIsPlayingPlaylist(
+      isPlaying && currentMusic?.playlist?._id === playlist?._id
+    );
   }, [currentMusic, isPlaying]);
 
   return (
