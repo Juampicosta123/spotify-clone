@@ -1,14 +1,14 @@
-import { usePlayerStore } from '@/store/playerStore';
+import { usePlayerStore } from '../store/playerStore';
 import { useRef, useEffect, useState } from 'react';
-import { Pause } from '@/icons/Pause';
-import { BackSong } from '@/icons/BackSong';
-import { Play } from '@/icons/Play';
-import { NextSong } from '@/icons/NextSong';
+import { Pause } from '../icons/Pause';
+import { BackSong } from '../icons/BackSong';
+import { Play } from '../icons/Play';
+import { NextSong } from '../icons/NextSong';
 import { RandomPlayButton } from './RandomPlayButton';
-import { SongControl } from '@/components/SongControl.jsx';
-import { CurrentSong } from '@/components/CurrentSong';
-import { VolumeControl } from '@/components/VolumeControl';
-import { setNextSong, setPrevSong } from '@/services/queue';
+import { SongControl } from '../components/SongControl.jsx';
+import { CurrentSong } from '../components/CurrentSong';
+import { VolumeControl } from '../components/VolumeControl';
+import { setNextSong, setPrevSong } from '../services/queue';
 
 export function Player() {
   const {

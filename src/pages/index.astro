@@ -1,12 +1,12 @@
 ---
-import PlaylistHorizontalCard from '@/components/PlaylistHorizontalCard.astro';
+import PlaylistHorizontalCard from '../components/PlaylistHorizontalCard.astro';
 import Layout from '../layouts/Layout.astro';
-import PlaylistSquareCard from '@/components/PlaylistSquareCard.astro';
-import Greeting from '@/components/Greeting.astro';
-import Header from '@/components/Header.astro';
-import { getPlaylists } from '@/services/playlist';
-import { getAlbums } from '@/services/album';
-import type { Album, Playlist } from '@/lib/data';
+import PlaylistSquareCard from '../components/PlaylistSquareCard.astro';
+import Greeting from '../components/Greeting.astro';
+import Header from '../components/Header.astro';
+import { getPlaylists } from '../services/playlist';
+import { getAlbums } from '../services/album';
+import type { Album, Playlist } from '../lib/data';
 
 const playlists = await getPlaylists({ searchQuery: '' });
 

@@ -1,5 +1,5 @@
-import { UnabledRandom } from '@/icons/UnabledRandom';
-import { usePlayerStore } from '@/store/playerStore';
+import { UnabledRandom } from '../icons/UnabledRandom';
+import { usePlayerStore } from '../store/playerStore';
 
 export function RandomPlayButton() {
   const { random, setRandom } = usePlayerStore((state) => state);

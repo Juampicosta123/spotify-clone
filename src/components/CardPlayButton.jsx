@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { usePlayerStore } from '@/store/playerStore';
-import { Pause } from '@/icons/Pause';
-import { Play } from '@/icons/Play';
+import { usePlayerStore } from '../store/playerStore';
+import { Pause } from '../icons/Pause';
+import { Play } from '../icons/Play';
 import { createQueue } from '../services/queue';
 
 export function CardPlayButton({ playlist, size = 'small', album }) {

@@ -1,5 +1,5 @@
-import { Pause } from '@/icons/Pause';
-import { Play } from '@/icons/Play';
+import { Pause } from '../icons/Pause';
+import { Play } from '../icons/Play';
 
 export function SongTableItemPlayButton({ isHovered, isPlayingItem }) {
   return (

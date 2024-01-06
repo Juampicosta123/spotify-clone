@@ -1,8 +1,8 @@
-import { Volume } from '@/icons/Volume';
-import { VolumeSilence } from '@/icons/VolumeSilence';
-import { usePlayerStore } from '@/store/playerStore';
+import { Volume } from '../icons/Volume';
+import { VolumeSilence } from '../icons/VolumeSilence';
+import { usePlayerStore } from '../store/playerStore';
 import { useRef } from 'react';
-import { Slider } from '@/components/Slider';
+import { Slider } from '../components/Slider';
 
 export const VolumeControl = () => {
   const volume = usePlayerStore((state) => state.volume);

@@ -1,6 +1,6 @@
-import { getAlbum } from '@/services/album';
-import { getPlaylist } from '@/services/playlist';
-import { usePlayerStore } from '@/store/playerStore';
+import { getAlbum } from '../services/album';
+import { getPlaylist } from '../services/playlist';
+import { usePlayerStore } from '../store/playerStore';
 import { useEffect, useState } from 'react';
 
 export const CurrentSongMobile = () => {

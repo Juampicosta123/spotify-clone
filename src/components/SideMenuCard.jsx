@@ -1,6 +1,6 @@
-import { usePlayerStore } from '@/store/playerStore';
+import { usePlayerStore } from '../store/playerStore';
 import { useEffect, useState } from 'react';
-import { Volume } from '@/icons/Volume.jsx';
+import { Volume } from '../icons/Volume.jsx';
 export const SideMenuCard = ({ playlist }) => {
   const { currentMusic, isPlaying } = usePlayerStore((state) => state);
 

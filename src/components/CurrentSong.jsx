@@ -1,4 +1,4 @@
-import { getAlbum } from '@/services/album';
+import { getAlbum } from '../services/album';
 import { useEffect, useState } from 'react';
 
 export const CurrentSong = ({ title, artists, albumId }) => {

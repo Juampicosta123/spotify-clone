@@ -1,6 +1,6 @@
-import { Home as HomeIcon } from '@/icons/Home.jsx';
-import { Search as SearchIcon } from '@/icons/Search.jsx';
-import { Library as LibraryIcon } from '@/icons/Library.jsx';
+import { Home as HomeIcon } from '../icons/Home.jsx';
+import { Search as SearchIcon } from '../icons/Search.jsx';
+import { Library as LibraryIcon } from '../icons/Library.jsx';
 import { SideMenuItem } from './SideMenuItem.jsx';
 import { SideMenuCard } from './SideMenuCard.jsx';
 import { useState, useEffect } from 'react';

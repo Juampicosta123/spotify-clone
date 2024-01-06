@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Slider } from '@/components/Slider';
+import { Slider } from '../components/Slider';
 import { formatTime } from '../utils/formatTime';
 
 export const SongControl = ({ audio }) => {

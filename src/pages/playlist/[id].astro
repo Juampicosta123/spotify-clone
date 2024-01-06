@@ -1,11 +1,11 @@
 ---
-import { SongsTable } from '@/components/SongsTable.jsx';
+import { SongsTable } from '../../components/SongsTable.jsx';
 import Layout from '../../layouts/Layout.astro';
-import { type Playlist } from '@/lib/data';
-import { CardPlayButton } from '@/components/CardPlayButton';
-import { RandomPlayButton } from '@/components/RandomPlayButton';
-import Header from '@/components/Header.astro';
-import { getPlaylist } from '@/services/playlist';
+import { type Playlist } from '../../lib/data';
+import { CardPlayButton } from '../../components/CardPlayButton';
+import { RandomPlayButton } from '../../components/RandomPlayButton';
+import Header from '../../components/Header.astro';
+import { getPlaylist } from '../../services/playlist';
 
 const { id } = Astro.params;
 
