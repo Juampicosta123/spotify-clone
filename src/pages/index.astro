@@ -30,7 +30,7 @@ const recentAlbums = albums?.slice(0, 6);
       >
         {
           recentPlaylists.map((playlist: Playlist) => (
-            <PlaylistHorizontalCard playlist={playlist} />
+            <PlaylistHorizontalCard client:load playlist={playlist} />
           ))
         }
       </div>
@@ -38,7 +38,7 @@ const recentAlbums = albums?.slice(0, 6);
       <div class='flex flex-wrap mt-6 gap-4'>
         {
           recentAlbums.map((album: Album) => (
-            <PlaylistSquareCard album={album} />
+            <PlaylistSquareCard client:load album={album} />
           ))
         }
       </div>
