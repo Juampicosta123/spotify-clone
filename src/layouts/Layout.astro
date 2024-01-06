@@ -28,7 +28,7 @@ const { title, description } = Astro.props;
       <aside class='[grid-area:aside] flex-col flex'>
         <AsideMenu client:load />
       </aside>
-      <main class='[grid-area:main] rounded-lg bg-zinc-900 overflow-y-auto'>
+      <main class='[grid-area:main] rounded-lg bg-zinc-900 overflow-y-auto' >
         <slot />
       </main>
       <footer class='[grid-area:player]'>

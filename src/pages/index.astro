@@ -16,7 +16,11 @@ const recentPlaylists = playlists?.slice(0, 6);
 const recentAlbums = albums?.slice(0, 6);
 ---
 
-<Layout title='Spotify Clone' description='Spotify clone using Tailwind'>
+<Layout
+  client:load
+  title='Spotify Clone'
+  description='Spotify clone using Tailwind'
+>
   <div
     id='playlist-container'
     class='relative z-10 transition-all duration-1000 bg-green-600/50 h-full'
