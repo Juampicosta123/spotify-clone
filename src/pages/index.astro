@@ -1,7 +1,7 @@
 ---
-import PlaylistHorizontalCard from '../components/PlaylistHorizontalCard.astro';
+import { PlaylistHorizontalCard } from '../components/PlaylistHorizontalCard.jsx';
 import Layout from '../layouts/Layout.astro';
-import PlaylistSquareCard from '../components/PlaylistSquareCard.astro';
+import { PlaylistSquareCard } from '../components/PlaylistSquareCard.jsx';
 import Greeting from '../components/Greeting.astro';
 import Header from '../components/Header.astro';
 import { getPlaylists } from '../services/playlist';
@@ -49,3 +49,4 @@ const recentAlbums = albums?.slice(0, 6);
     </div>
   </div>
 </Layout>
+../components/PlaylistHorizontalCard.jsx ../components/PlaylistSquareCard.jsx/index.js
