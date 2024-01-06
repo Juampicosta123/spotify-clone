@@ -4,25 +4,28 @@ import { Pause } from '@/icons/Pause';
 import { Play } from '@/icons/Play';
 import { createQueue } from '../services/queue';
 
-export function CardPlayButton({ playlist, size = 'small' }) {
-  const { currentMusic, isPlaying, setIsPlaying, random, queue, setQueue } =
+export function CardPlayButton({ playlist, size = 'small', album }) {
+  const { isPlaying, setIsPlaying, random, queue, setQueue } =
     usePlayerStore((state) => state);
-  const [isPlayingPlaylist, setIsPlayingPlaylist] = useState(
+  const [isPlayingItem, setIsPlayingItem] = useState(
     isPlaying && queue?.song?.albumId === playlist?._id
   );
 
+  const item = playlist ? playlist : album;
+  const ItemType = playlist ? 'Playlist' : 'Album';
+
   const handleClick = async () => {
-    if (queue?.song?._id === playlist?._id) {
+    if (queue?.from === item?._id) {
       setIsPlaying(!isPlaying);
       return;
     }
     try {
       let newQueue;
       if (queue) {
-        if (queue?.from !== playlist?._id) {
+        if (queue?.from !== item?._id) {
           newQueue = await createQueue({
-            from: playlist._id,
-            fromType: 'Playlist',
+            from: item._id,
+            fromType: ItemType,
             random
           });
         } else {
@@ -31,26 +34,27 @@ export function CardPlayButton({ playlist, size = 'small' }) {
         }
       } else {
         newQueue = await createQueue({
-          from: playlist._id,
-          fromType: 'Playlist',
+          from: item._id,
+          fromType: ItemType,
           random
         });
       }
 
       setQueue(newQueue);
-
       setIsPlaying(true);
-      localStorage.setItem('currentMusic', JSON.stringify(queue));
+      //localStorage.setItem('queue', JSON.stringify(newQueue));
     } catch (error) {
       console.error('Error fetching queue:', error);
     }
   };
 
   useEffect(() => {
-    setIsPlayingPlaylist(
-      isPlaying && currentMusic?.song?.albumId === playlist?._id
-    );
-  }, [currentMusic, isPlaying]);
+    if (queue?.from === item?._id) {
+      setIsPlayingItem(!isPlayingItem);
+    } else {
+      setIsPlayingItem(false);
+    }
+  }, [queue, isPlaying]);
 
   const btnClassName = size === 'small' ? 'p-4' : 'p-5';
   const iconClassName = size === 'small' ? 'w-4 h-4' : 'w-6 h-6';
@@ -60,7 +64,7 @@ export function CardPlayButton({ playlist, size = 'small' }) {
       onClick={handleClick}
       className={` rounded-full bg-green-500 hover:scale-105 transition hover:bg-green-400 ${btnClassName}`}
     >
-      {isPlayingPlaylist ? (
+      {isPlayingItem ? (
         <Pause className={iconClassName + ' text-[#000]'} />
       ) : (
         <Play className={iconClassName + ' text-[#000]'} />

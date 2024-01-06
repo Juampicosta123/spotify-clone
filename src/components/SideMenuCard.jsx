@@ -27,8 +27,8 @@ export const SideMenuCard = ({ playlist }) => {
       href={`/playlist/${id}`}
       className='playlist-item flex relative w-full overflow-hidden items-center gap-5 rounded-md hover:bg-zinc-800 justify-between'
     >
-      <div className='flex p-2 w-full items-center gap-5'>
-        <picture className='size-12 flex-none'>
+      <div className='flex lg:p-2 w-full justify-center items-center gap-5'>
+        <picture className='size-8 lg:size-12 flex-none'>
           <img
             src={imagelink}
             alt={`Cover of ${title} by ${artistsString}`}
@@ -36,7 +36,7 @@ export const SideMenuCard = ({ playlist }) => {
           />
         </picture>
 
-        <div className='flex flex-auto flex-col w-full'>
+        <div className='flex-auto flex-col w-full hidden lg:flex'>
           <h4 className={playingSongClassName}>{title}</h4>
           <span className='text-gray-400 text-sm truncate'>
             Playlist · {owner}

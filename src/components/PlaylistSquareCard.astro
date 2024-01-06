@@ -1,15 +1,13 @@
 ---
-import { type Playlist } from '@/lib/data';
+import { type Album } from '@/lib/data';
 import { CardPlayButton } from '@/components/CardPlayButton.jsx';
 
 interface Props {
-  playlist: Playlist;
+  album: Album;
 }
-const { playlist } = Astro.props;
+const { album } = Astro.props;
 
-const { title, imagelink, artists, _id: id } = playlist;
-
-const artistsString = artists.join(', ');
+const { title, imagelink, artistOwner, _id: id } = album;
 ---
 
 <article
@@ -22,17 +20,17 @@ const artistsString = artists.join(', ');
     z-10
   `
   >
-    <CardPlayButton playlist={playlist} client:visible />
+    <CardPlayButton album={album} playlist={null} client:visible />
   </div>
 
   <a
-    href={`/playlist/${id}`}
+    href={`/album/${id}`}
     class='playlist-item transition-all duration-300 flex relative p-2 overflow-hidden gap-2 pb-6 rounded-md w-44 flex-col'
   >
     <picture class='aspect-square w-full h-auto flex-none'>
       <img
         src={imagelink}
-        alt={`Cover of ${title} by ${artistsString}`}
+        alt={`Cover of ${title} by ${artistOwner}`}
         class='object-cover w-full h-full rounded-md'
       />
     </picture>
@@ -43,7 +41,7 @@ const artistsString = artists.join(', ');
       </h4>
 
       <span class='text-sm text-gray-400 truncate font-light'>
-        {artistsString}
+        {artistOwner}
       </span>
     </div>
   </a>

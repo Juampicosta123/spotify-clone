@@ -22,9 +22,9 @@ export const CurrentSong = ({ title, artists, albumId }) => {
   const artistsString = artists?.join(', ');
   return (
     <div
-      className={`playlist-item flex relative overflow-hidden items-center gap-5 rounded-md`}
+      className={`hidden sm:flex playlist-item relative overflow-hidden items-center gap-5 rounded-md`}
     >
-      <picture className='size-16 flex-none'>
+      <picture className='size-12 md:size-16 flex-none'>
         {!imagelink ? (
           <div className='bg-zinc-700 size-full'></div>
         ) : (

@@ -4,43 +4,48 @@ import Layout from '../layouts/Layout.astro';
 import PlaylistSquareCard from '@/components/PlaylistSquareCard.astro';
 import Greeting from '@/components/Greeting.astro';
 import Header from '@/components/Header.astro';
+import { getPlaylists } from '@/services/playlist';
+import { getAlbums } from '@/services/album';
+import type { Album, Playlist } from '@/lib/data';
 
-const playlists = await fetch(`http://localhost:3000/api/playlist/`, {
-  method: 'GET'
-})
-  .then((res) => res.json())
-  .then((data) => data.data);
+const playlists = await getPlaylists({ searchQuery: '' });
 
-const recent = playlists.slice(0, 6);
+const albums = await getAlbums({ searchQuery: '' });
+
+const recentPlaylists = playlists?.slice(0, 6);
+const recentAlbums = albums?.slice(0, 6);
 ---
 
 <Layout title='Spotify Clone' description='Spotify clone using Tailwind'>
   <div
     id='playlist-container'
-    class='relative transition-all duration-1000 bg-green-600/50'
+    class='relative z-10 transition-all duration-1000 bg-green-600/50 h-full'
   >
     <Header />
-    <div class='relative z-10 px-6 pt-1'>
+    <div class='relative px-6 pt-1'>
       <Greeting />
 
       <div
         class='grid gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 p-3 mt-2'
       >
         {
-          recent.map((playlist) => (
+          recentPlaylists.map((playlist: Playlist) => (
             <PlaylistHorizontalCard playlist={playlist} />
           ))
         }
       </div>
       <h2 class='text-3xl font-bold mt-3'>Creados para tí</h2>
       <div class='flex flex-wrap mt-6 gap-4'>
-        {recent.map((playlist) => <PlaylistSquareCard playlist={playlist} />)}
+        {
+          recentAlbums.map((album: Album) => (
+            <PlaylistSquareCard album={album} />
+          ))
+        }
       </div>
-
-      <div
-        class='absolute -z-10 inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80'
-      >
-      </div>
+    </div>
+    <div
+      class='absolute -z-10 inset-0 top-0 h-full bg-gradient-to-t from-zinc-900 via-zinc-900/80'
+    >
     </div>
   </div>
 </Layout>

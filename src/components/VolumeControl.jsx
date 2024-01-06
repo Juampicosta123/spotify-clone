@@ -21,7 +21,7 @@ export const VolumeControl = () => {
   };
 
   return (
-    <div className='flex justify-center gap-x-2 px-8 text-white'>
+    <div className='hidden sm:flex justify-end gap-x-2 px-2 lg:px-8 text-white'>
       <button
         className='opacity-70 hover:opacity-100 transition'
         onClick={handleClickVolumen}
@@ -34,11 +34,12 @@ export const VolumeControl = () => {
         max={100}
         min={0}
         value={[volume * 100]}
-        className='w-[95px]'
+        className='w-[80px] lg:w-[95px]'
         onValueChange={(value) => {
           const [newVolume] = value;
           const volumeValue = newVolume / 100;
           setVolume(volumeValue);
+          localStorage.setItem('volume', JSON.stringify(volumeValue));
         }}
       />
     </div>

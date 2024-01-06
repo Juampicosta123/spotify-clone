@@ -1,9 +1,10 @@
 export const getPlaylists = async ({ searchQuery = '' }) => {
     try {
-      const playlists = await fetch(`http://localhost:3000/api/playlist?search=${searchQuery}`, {
+      const {data} = await fetch(`http://localhost:3000/api/playlist?search=${searchQuery}`, {
         method: 'GET',
       })
         .then((res) => res.json())
+        const playlists = data
       return playlists;
     } catch (error) {
       console.error('Error fetching playlists:', error);

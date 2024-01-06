@@ -27,8 +27,8 @@ export const AsideMenu = () => {
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
-        const { data } = await getPlaylists({ searchQuery: '' });
-        setPlaylists(data);
+        const playlists = await getPlaylists({ searchQuery: '' });
+        setPlaylists(playlists);
       } catch (error) {
         console.error('Error fetching playlists:', error);
       }
@@ -43,11 +43,11 @@ export const AsideMenu = () => {
         <ul>
           <SideMenuItem href='/' className='gap-5'>
             <HomeIcon className='size-6' />
-            Inicio
+            <span className='hidden lg:block'>Inicio</span>
           </SideMenuItem>
           <SideMenuItem href='/#' className='gap-5'>
             <SearchIcon className='size-6' />
-            Buscar
+            <span className='hidden lg:block'>Buscar</span>
           </SideMenuItem>
         </ul>
       </div>
@@ -56,11 +56,11 @@ export const AsideMenu = () => {
         <ul>
           <SideMenuItem href='/' className='gap-3'>
             <LibraryIcon className='size-6' />
-            Tu biblioteca
+            <span className='hidden lg:block'>Tu biblioteca</span>
           </SideMenuItem>
-          <div className='overflow-y-auto overflow-x-auto h-[685px]'>
+          <div className='overflow-y-auto overflow-x-auto h-full max-h-[685px]'>
             <SideMenuItem className='flex'>
-              <div className='group flex gap-2 items-center justify-center bg-zinc-800 hover:bg-zinc-700 p-1 rounded-md'>
+              <div className='group gap-2 items-center justify-center bg-zinc-800 hover:bg-zinc-700 p-1 rounded-md hidden lg:flex'>
                 <SearchIcon className='size-4' />
                 <input
                   onChange={search}

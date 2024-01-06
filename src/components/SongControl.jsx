@@ -21,7 +21,7 @@ export const SongControl = ({ audio }) => {
 
   return (
     <div className='flex gap-x-3 text-xs pt-2'>
-      <span className='opacity-50 w-12 text-right'>
+      <span className='opacity-50 md:w-12 text-right'>
         {formatTime(currentTime)}
       </span>
       <Slider
@@ -29,13 +29,13 @@ export const SongControl = ({ audio }) => {
         max={audio?.current?.duration ?? 0}
         min={0}
         value={[currentTime]}
-        className='w-[500px] '
+        className='w-[280px] sm:w-[200px] md:w-[350px] lg:w-[500px] '
         onValueChange={(value) => {
           const [newCurrentTime] = value;
           audio.current.currentTime = newCurrentTime;
         }}
       />
-      <span className='opacity-50 w-12'>
+      <span className='opacity-50 md:w-12'>
         {duration ? formatTime(duration) : null}
       </span>
     </div>

@@ -11,18 +11,26 @@ import { VolumeControl } from '@/components/VolumeControl';
 import { setNextSong, setPrevSong } from '@/services/queue';
 
 export function Player() {
-  const { isPlaying, setIsPlaying, volume, queue, setQueue, random } =
-    usePlayerStore((state) => state);
+  const {
+    isPlaying,
+    setIsPlaying,
+    volume,
+    queue,
+    setQueue,
+    random,
+    setVolume
+  } = usePlayerStore((state) => state);
   const audioRef = useRef();
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
-    const storedQueue = localStorage.getItem('queue');
+    //const storedQueue = localStorage.getItem('queue');
+    const volume = JSON.parse(localStorage.getItem('volume'));
 
-    const currentQueue =
-      storedQueue === 'undefined' ? undefined : JSON.parse(storedQueue);
+    //const currentQueue = storedQueue === 'undefined' ? undefined : JSON.parse(storedQueue);
 
-    setQueue(currentQueue);
+    // setQueue(currentQueue);
+    setVolume(volume);
   }, []);
 
   useEffect(() => {
@@ -38,16 +46,15 @@ export function Player() {
     const queueData = await setPrevSong({ id: queue?._id });
     setIsPlaying(true);
     setQueue(queueData);
-    localStorage.setItem('queue', JSON.stringify(queueData));
+    //localStorage.setItem('queue', JSON.stringify(queueData));
   };
 
   const playNextSong = async () => {
     if (queue?.finished) return setQueue(null);
-    console.log(random);
     const queueData = await setNextSong({ id: queue?._id, random });
     setIsPlaying(true);
     setQueue(queueData);
-    localStorage.setItem('queue', JSON.stringify(queueData));
+    //localStorage.setItem('queue', JSON.stringify(queueData));
   };
 
   useEffect(() => {
@@ -76,7 +83,7 @@ export function Player() {
 
         setQueue(queueData);
         setIsPlaying(true);
-        localStorage.setItem('queue', JSON.stringify(queueData));
+        //localStorage.setItem('queue', JSON.stringify(queueData));
       }
     };
     handleCurrentTime();
@@ -100,11 +107,11 @@ export function Player() {
   };
 
   return (
-    <div className='flex flex-row justify-between w-full p-1 z-50'>
-      <div className='w-[200px]'>
+    <div className='player w-full p-1 z-50 mt-2 sm:mt-0'>
+      <div className='w-full flex items-center'>
         <CurrentSong
           {...queue?.currentSong}
-          albumId={queue?.currentSong.albumId}
+          albumId={queue?.currentSong?.albumId}
         />
       </div>
       <div className='grid place-content-center gap-4 flex-1'>
@@ -117,20 +124,20 @@ export function Player() {
             </button>
             <button onClick={handleClick} className='bg-white rounded-full p-2'>
               {isPlaying ? (
-                <Pause className='w-5 h-5 text-black' />
+                <Pause className='size-4 sm:size-5 text-black' />
               ) : (
-                <Play className='w-5 h-5 text-black' />
+                <Play className='size-4 sm:size-5 text-black' />
               )}
             </button>
             <button onClick={playNextSong}>
               <NextSong className='text-white/80 hover:text-white' />
             </button>
+            <RandomPlayButton />
           </div>
 
           <SongControl audio={audioRef} />
         </div>
       </div>
-      <div className='grid place-content-center'></div>
       <VolumeControl />
       <audio ref={audioRef} />
     </div>
