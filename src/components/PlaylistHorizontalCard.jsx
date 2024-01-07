@@ -13,7 +13,7 @@ export const PlaylistHorizontalCard = ({ playlist }) => {
   group-hover:translate-y-0 group-hover:opacity-100
   z-10'
       >
-        <CardPlayButton album={null} playlist={playlist} client:visible />
+        <CardPlayButton album={null} playlist={playlist} client:load />
       </div>
       <a
         href={`/playlist/${id}`}

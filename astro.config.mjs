@@ -8,8 +8,5 @@ import netlify from "@astrojs/netlify";
 export default defineConfig({
   integrations: [tailwind(), react()],
   output: 'server',
-  adapter: netlify({
-    edgeMiddleware: true,
-    cacheOnDemandPages: true,
-   }),
+  adapter: netlify(),
 });
