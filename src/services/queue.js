@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_ENDPOINT = 'http://localhost:3000/api'
+const API_ENDPOINT = 'https://localhost:3000/api'
 
 export const createQueue = async ({ from, fromType, random, songId }) => {
     try {
