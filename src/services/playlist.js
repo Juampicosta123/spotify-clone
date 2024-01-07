@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_ENDPOINT = 'https://localhost:3000/api'
+const API_ENDPOINT = 'https://spotyclone-api.onrender.com/api'
 
 export const getPlaylists = async ({ searchQuery = '' }) => {
     try {
