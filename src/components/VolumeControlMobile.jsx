@@ -4,7 +4,7 @@ import { usePlayerStore } from '../store/playerStore';
 import { useEffect, useRef } from 'react';
 import { Slider } from '../components/Slider';
 
-export const VolumeControl = () => {
+export const VolumeControlMobile = () => {
   const volume = usePlayerStore((state) => state.volume);
   const setVolume = usePlayerStore((state) => state.setVolume);
   const previousVolumeRef = useRef(volume);
@@ -25,7 +25,7 @@ export const VolumeControl = () => {
   };
 
   return (
-    <div className='hidden sm:flex justify-end gap-x-2 px-2 lg:px-8 text-white'>
+    <div className='flex sm:hidden justify-end gap-x-2 px-2 lg:px-8 text-white'>
       <button
         className='opacity-70 hover:opacity-100 transition'
         onClick={handleClickVolumen}

@@ -2,6 +2,7 @@ import { getAlbum } from '../services/album';
 import { getPlaylist } from '../services/playlist';
 import { usePlayerStore } from '../store/playerStore';
 import { useEffect, useState } from 'react';
+import { VolumeControlMobile } from './VolumeControlMobile';
 
 export const CurrentSongMobile = () => {
   const [album, setAlbum] = useState('');
@@ -58,6 +59,7 @@ export const CurrentSongMobile = () => {
           {artistsString}
         </span>
       </div>
+      <VolumeControlMobile />
       <div className='absolute -z-10 inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/50'></div>
     </div>
   );
