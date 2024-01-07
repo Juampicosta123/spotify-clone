@@ -1,19 +1,13 @@
 import { getAlbum } from '../services/album';
 import { useEffect, useState } from 'react';
 
-export function SongInfo({
-  title,
-  artists,
-  isPlayingSong,
-  albumId,
-  id
-}) {
+export function SongInfo({ title, artists, isPlayingSong, albumId, id }) {
   const [album, setAlbum] = useState({});
   useEffect(() => {
     const fetchAlbum = async () => {
       try {
-        const { data } = await getAlbum({ id: albumId });
-        setAlbum(data);
+        const album = await getAlbum({ id: albumId });
+        setAlbum(album);
       } catch (error) {
         console.error('Error fetching Album:', error);
       }
@@ -22,7 +16,7 @@ export function SongInfo({
     fetchAlbum();
   }, []);
 
-  const cover = album.imagelink;
+  const cover = album?.imagelink;
 
   const playingSongClassName = isPlayingSong ? 'text-green-500' : 'text-white';
 

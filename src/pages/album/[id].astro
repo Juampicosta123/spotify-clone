@@ -9,8 +9,7 @@ import { getAlbum } from '../../services/album';
 
 const { id } = Astro.params;
 
-const response = await getAlbum({ id });
-const album = response.data;
+const album = await getAlbum({ id });
 
 function sumarHoras(array: Album[]) {
   let suma = 0;

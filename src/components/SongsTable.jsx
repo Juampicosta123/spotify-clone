@@ -3,7 +3,9 @@ import { SongTableItem } from './SongTableItem.jsx';
 
 export function SongsTable({ playlist, album }) {
   const item = playlist ? playlist : album;
-  const songs = item.songs;
+  const songs = item?.songs;
+  const albumm = album ? album : null;
+  const playlistt = playlist ? playlist : null;
   return (
     <table className='table-auto text-left min-w-full divide-y divide-gray-500/20'>
       <thead className=''>
@@ -20,8 +22,8 @@ export function SongsTable({ playlist, album }) {
         <tr className='h-[12px] hidden sm:block'></tr>
         {songs?.map((song, index) => (
           <SongTableItem
-            album={album}
-            playlist={null}
+            album={albumm}
+            playlist={playlistt}
             client:load
             key={song?._id}
             index={index}

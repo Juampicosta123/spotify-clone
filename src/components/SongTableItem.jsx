@@ -31,20 +31,21 @@ export function SongTableItem({ song, index, playlist, album }) {
       setIsPlaying(!isPlaying);
       return;
     }
+
     try {
       let newQueue;
       if (!queue) {
         newQueue = await createQueue({
-          from: item._id,
+          from: item?._id,
           fromType: itemType,
           random,
           songId: song?._id
         });
-      } else if (queue.currentSong._id === song._id) {
+      } else if (queue?.currentSong?._id === song?._id) {
         newQueue = queue;
-      } else if (queue.currentSong._id !== song._id) {
+      } else if (queue?.currentSong?._id !== song?._id) {
         newQueue = await createQueue({
-          from: item._id,
+          from: item?._id,
           fromType: itemType,
           random,
           songId: song?._id

@@ -1,10 +1,11 @@
+import axios from "axios";
+
+const API_ENDPOINT = 'http://localhost:3000/api'
+
 export const getPlaylists = async ({ searchQuery = '' }) => {
     try {
-      const {data} = await fetch(`http://localhost:3000/api/playlist?search=${searchQuery}`, {
-        method: 'GET',
-      })
-        .then((res) => res.json())
-        const playlists = data
+      const {data} = await axios.get(`${API_ENDPOINT}/playlist?search=${searchQuery}`)
+      const playlists = data.data
       return playlists;
     } catch (error) {
       console.error('Error fetching playlists:', error);
@@ -14,11 +15,8 @@ export const getPlaylists = async ({ searchQuery = '' }) => {
 
 export const getPlaylist = async ({ id }) => {
     try {
-      const playlist = await fetch(`http://localhost:3000/api/playlist/${id}`, {
-        method: 'GET',
-      })
-        .then((res) => res.json())
-  
+      const {data} = await axios.get(`${API_ENDPOINT}/playlist/${id}`)
+      const playlist = data.data
       return playlist;
     } catch (error) {
       console.error('Error fetching playlist:', error);

@@ -9,8 +9,7 @@ import { getPlaylist } from '../../services/playlist';
 
 const { id } = Astro.params;
 
-const response = await getPlaylist({ id });
-const playlist = response.data;
+const playlist = await getPlaylist({ id });
 
 function sumarHoras(array: Playlist[]) {
   let suma = 0;

@@ -16,10 +16,7 @@ const recentPlaylists = playlists?.slice(0, 6);
 const recentAlbums = albums?.slice(0, 6);
 ---
 
-<Layout
-  title='Spotify Clone'
-  description='Spotify clone using Tailwind'
->
+<Layout title='Spotify Clone' description='Spotify clone using Tailwind'>
   <div
     id='playlist-container'
     class='relative z-10 transition-all duration-1000 bg-green-600/50 h-full'
@@ -32,7 +29,7 @@ const recentAlbums = albums?.slice(0, 6);
         class='grid gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 p-3 mt-2'
       >
         {
-          recentPlaylists.map((playlist: Playlist) => (
+          recentPlaylists?.map((playlist: Playlist) => (
             <PlaylistHorizontalCard client:load playlist={playlist} />
           ))
         }
@@ -40,7 +37,7 @@ const recentAlbums = albums?.slice(0, 6);
       <h2 class='text-3xl font-bold mt-3'>Creados para tí</h2>
       <div class='flex flex-wrap mt-6 gap-4'>
         {
-          recentAlbums.map((album: Album) => (
+          recentAlbums?.map((album: Album) => (
             <PlaylistSquareCard client:load album={album} />
           ))
         }

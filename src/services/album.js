@@ -1,10 +1,11 @@
+import axios from "axios";
+
+const API_ENDPOINT = 'http://localhost:3000/api'
+
 export const getAlbums = async ({ searchQuery = '' }) => {
     try {
-      const {data} = await fetch(`http://localhost:3000/api/album?search=${searchQuery}`, {
-        method: 'GET',
-      })
-        .then((res) => res.json())
-      const albums = data
+      const {data} = await axios.get(`${API_ENDPOINT}/album?search=${searchQuery}`)
+      const albums = data.data
       return albums;
     } catch (error) {
       console.error('Error fetching albums:', error);
@@ -14,11 +15,8 @@ export const getAlbums = async ({ searchQuery = '' }) => {
 
   export const getAlbum = async ({ id }) => {
     try {
-      const album = await fetch(`http://localhost:3000/api/album/${id}`, {
-        method: 'GET',
-      })
-        .then((res) => res.json())
-  
+      const {data} = await axios.get(`${API_ENDPOINT}/album/${id}`)
+      const album = data.data
       return album;
     } catch (error) {
       console.error('Error fetching album:', error);
