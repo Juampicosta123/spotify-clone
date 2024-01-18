@@ -17,7 +17,8 @@ export const AsideMenu = () => {
     setSearchQuery(lowerCaseQuery);
 
     try {
-      const { data } = await getPlaylists({ searchQuery: lowerCaseQuery });
+      const data  = await getPlaylists({ searchQuery: lowerCaseQuery });
+      console.log(data);
       setSearchPlaylist(data);
     } catch (error) {
       console.error('Error fetching playlists:', error);
@@ -72,11 +73,11 @@ export const AsideMenu = () => {
             </SideMenuItem>
             <div className='w-full'>
               {searchQuery &&
-                searchPlaylist.length !== 0 &&
-                searchPlaylist.map((playlist) => (
+                searchPlaylist?.length !== 0 &&
+                searchPlaylist?.map((playlist) => (
                   <SideMenuCard key={playlist._id} playlist={playlist} />
                 ))}
-              {searchQuery && searchPlaylist.length === 0 && (
+              {searchQuery && searchPlaylist?.length === 0 && (
                 <p className='m-3'>No se encontraron playlists!</p>
               )}
               {!searchQuery &&
