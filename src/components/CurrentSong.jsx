@@ -1,4 +1,4 @@
-import { usePlayerStore } from '@/store/playerStore';
+import { usePlayerStore } from '../store/playerStore';
 import { getAlbum } from '../services/album';
 import { useEffect, useState } from 'react';
 
