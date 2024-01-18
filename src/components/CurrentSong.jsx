@@ -1,14 +1,16 @@
+import { usePlayerStore } from '@/store/playerStore';
 import { getAlbum } from '../services/album';
 import { useEffect, useState } from 'react';
 
 export const CurrentSong = ({ title, artists, albumId }) => {
   const [imagelink, setImagelink] = useState('');
+  const queue = usePlayerStore((state) => state.queue);
 
   useEffect(() => {
     const fetchAlbum = async () => {
       try {
         if (albumId) {
-          const { data } = await getAlbum({ id: albumId });
+          const data = await getAlbum({ id: albumId });
           setImagelink(data?.imagelink);
         }
       } catch (error) {
@@ -17,7 +19,7 @@ export const CurrentSong = ({ title, artists, albumId }) => {
     };
 
     fetchAlbum();
-  }, [albumId]);
+  }, [queue]);
 
   const artistsString = artists?.join(', ');
   return (
