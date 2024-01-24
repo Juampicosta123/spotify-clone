@@ -5,13 +5,14 @@ import { SideMenuItem } from './SideMenuItem.jsx';
 import { SideMenuCard } from './SideMenuCard.jsx';
 import { useState, useEffect } from 'react';
 import { getPlaylists } from '../services/playlist';
+import debounce from 'just-debounce-it';
 
 export const AsideMenu = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchPlaylist, setSearchPlaylist] = useState([]);
   const [playlists, setPlaylists] = useState([]);
 
-  const search = async (e) => {
+  const search = debounce(async (e) => {
     e.preventDefault();
     const lowerCaseQuery = e.target.value.toLowerCase();
     setSearchQuery(lowerCaseQuery);
@@ -23,7 +24,7 @@ export const AsideMenu = () => {
     } catch (error) {
       console.error('Error fetching playlists:', error);
     }
-  };
+  }, 1500);
 
   useEffect(() => {
     const fetchPlaylists = async () => {
