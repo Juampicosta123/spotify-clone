@@ -1,0 +1,46 @@
+---
+import { CardPlayButton } from './CardPlayButton.jsx';
+
+const { album } = Astro.props;
+---
+
+<article
+  class='group relative bg-zinc-800 shadow-lg hover:shadow-xl hover:bg-zinc-500/30 rounded-md ransi transition-all duration-100'
+>
+  <div
+    class='absolute right-4 bottom-20 translate-y-4
+      transition-all duration-500 opacity-0
+      group-hover:translate-y-0 group-hover:opacity-100
+      z-10'
+  >
+    <CardPlayButton album={album} playlist={null} client:visible />
+  </div>
+
+  <a
+    href={`/album/${album?._id}`}
+    class='playlist-item transition-all duration-300 flex relative p-2 overflow-hidden gap-2 pb-6 rounded-md w-44 flex-col'
+    transition:name={`album ${album?._id} square box`}
+  >
+    <picture class='aspect-square w-full h-auto flex-none'>
+      <img
+        src={album?.imagelink}
+        alt={`Cover of ${album?.title} by ${album?.artistOwner}`}
+        class='object-cover w-full h-full rounded-md'
+        transition:name={`album ${album?._id} image square`}
+      />
+    </picture>
+
+    <div class='flex flex-auto flex-col px-2'>
+      <h2
+        transition:name={`album ${album?._id} title square`}
+        class='text-white text-md font-semibold truncate'
+      >
+        {album?.title}
+      </h2>
+
+      <span class='text-sm text-gray-400 truncate font-light'>
+        {album?.artistOwner}
+      </span>
+    </div>
+  </a>
+</article>

@@ -1,7 +1,7 @@
 ---
-import { PlaylistHorizontalCard } from '../components/PlaylistHorizontalCard.jsx';
+import PlaylistHorizontalCard from '../components/PlaylistHorizontalCard.astro';
 import Layout from '../layouts/Layout.astro';
-import { PlaylistSquareCard } from '../components/PlaylistSquareCard.jsx';
+import PlaylistSquareCard from '../components/PlaylistSquareCard.astro';
 import Greeting from '../components/Greeting.astro';
 import Header from '../components/Header.astro';
 import { getPlaylists } from '../services/playlist';
@@ -30,7 +30,7 @@ const recentAlbums = albums?.slice(0, 6);
       >
         {
           recentPlaylists?.map((playlist: Playlist) => (
-            <PlaylistHorizontalCard client:load playlist={playlist} />
+            <PlaylistHorizontalCard playlist={playlist} />
           ))
         }
       </div>
@@ -38,7 +38,7 @@ const recentAlbums = albums?.slice(0, 6);
       <div class='flex flex-wrap mt-6 gap-4'>
         {
           recentAlbums?.map((album: Album) => (
-            <PlaylistSquareCard client:load album={album} />
+            <PlaylistSquareCard album={album} />
           ))
         }
       </div>
@@ -49,4 +49,3 @@ const recentAlbums = albums?.slice(0, 6);
     </div>
   </div>
 </Layout>
-../components/PlaylistHorizontalCard.jsx ../components/PlaylistSquareCard.jsx/index.js

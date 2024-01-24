@@ -4,7 +4,7 @@ import { Pause } from '../icons/Pause';
 import { BackSong } from '../icons/BackSong';
 import { Play } from '../icons/Play';
 import { NextSong } from '../icons/NextSong';
-import { RandomPlayButton } from './RandomPlayButton';
+// import { RandomPlayButton } from './RandomPlayButton';
 import { SongControl } from '../components/SongControl.jsx';
 import { CurrentSong } from '../components/CurrentSong';
 import { VolumeControl } from '../components/VolumeControl';
@@ -117,22 +117,27 @@ export function Player() {
       <div className='grid place-content-center gap-4 flex-1'>
         <div className='flex justify-center flex-col items-center'>
           <div className='flex gap-5 items-center'>
-            <RandomPlayButton />
-
-            <button className='' onClick={playPrevSong}>
+            <button
+              aria-label='previos song'
+              className=''
+              onClick={playPrevSong}
+            >
               <BackSong className='text-white/80 hover:text-white' />
             </button>
-            <button onClick={handleClick} className='bg-white rounded-full p-2'>
+            <button
+              aria-label='play or pause song'
+              onClick={handleClick}
+              className='bg-white rounded-full p-2'
+            >
               {isPlaying ? (
                 <Pause className='size-4 sm:size-5 text-black' />
               ) : (
                 <Play className='size-4 sm:size-5 text-black' />
               )}
             </button>
-            <button onClick={playNextSong}>
+            <button aria-label='next song' onClick={playNextSong}>
               <NextSong className='text-white/80 hover:text-white' />
             </button>
-            <RandomPlayButton />
           </div>
 
           <SongControl audio={audioRef} />

@@ -27,6 +27,7 @@ export const VolumeControlMobile = () => {
   return (
     <div className='flex sm:hidden justify-end gap-x-2 px-2 lg:px-8 text-white'>
       <button
+        aria-label='silence volume'
         className='opacity-70 hover:opacity-100 transition'
         onClick={handleClickVolumen}
       >

@@ -50,6 +50,7 @@ export const CurrentSongMobile = () => {
 
       <div className='flex flex-auto flex-col w-full'>
         <a
+          aria-label='Reproduce una canción!'
           href={`/song/${currentSong?.title}`}
           className='text-white hover:underline text-sm'
         >

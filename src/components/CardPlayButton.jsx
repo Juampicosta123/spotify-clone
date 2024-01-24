@@ -5,8 +5,9 @@ import { Play } from '../icons/Play';
 import { createQueue } from '../services/queue';
 
 export function CardPlayButton({ playlist, size = 'small', album }) {
-  const { isPlaying, setIsPlaying, random, queue, setQueue } =
-    usePlayerStore((state) => state);
+  const { isPlaying, setIsPlaying, random, queue, setQueue } = usePlayerStore(
+    (state) => state
+  );
   const [isPlayingItem, setIsPlayingItem] = useState(
     isPlaying && queue?.song?.albumId === playlist?._id
   );
@@ -61,6 +62,7 @@ export function CardPlayButton({ playlist, size = 'small', album }) {
 
   return (
     <button
+      title='play playlist'
       onClick={handleClick}
       className={` rounded-full bg-green-500 hover:scale-105 transition hover:bg-green-400 ${btnClassName}`}
     >

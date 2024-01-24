@@ -40,6 +40,7 @@ export const CurrentSong = ({ title, artists, albumId }) => {
 
       <div className='flex flex-auto flex-col w-full'>
         <a
+          aria-label='Reproduce una canción!'
           href={`/song/${title}`}
           className='text-white hover:underline text-sm'
         >

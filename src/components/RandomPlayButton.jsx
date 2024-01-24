@@ -9,7 +9,7 @@ export function RandomPlayButton() {
   };
 
   return (
-    <button onClick={handleClick}>
+    <button aria-label='random songs' onClick={handleClick}>
       {<UnabledRandom className={random ? 'text-green-500' : ''} />}
     </button>
   );
