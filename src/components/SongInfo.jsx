@@ -39,12 +39,11 @@ export function SongInfo({ title, artists, isPlayingSong, albumId, id }) {
       </picture>
 
       <div className='flex flex-auto flex-col w-full'>
-        <a
-          href={`/song/${id}`}
+        <span
           className={` ${playingSongClassName} hover:underline text-sm w-max`}
         >
           {title}
-        </a>
+        </span>
         <a
           href={`/album/${album._id}`}
           className='text-gray-400 text-xs truncate hover:underline w-max'
