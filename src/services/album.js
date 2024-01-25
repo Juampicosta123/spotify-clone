@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_ENDPOINT = 'https://spotyclone-api.onrender.com/api'
+const API_ENDPOINT = 'https://spotify-clone-api-eight.vercel.app/api'
 
 export const getAlbums = async ({ searchQuery = '' }) => {
     try {
