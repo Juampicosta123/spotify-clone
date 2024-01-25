@@ -2,7 +2,7 @@ import { usePlayerStore } from '../store/playerStore';
 import { SongInfo } from './SongInfo.jsx';
 import { useEffect, useState } from 'react';
 import { SongTableItemPlayButton } from './SongTableItemPlayButton.jsx';
-import { formatTime } from '../utils/formatTime.jsx';
+import { formatTime } from '../utils/formatTime.js';
 import { createQueue } from '../services/queue.js';
 
 export function SongTableItem({ song, index, playlist, album }) {

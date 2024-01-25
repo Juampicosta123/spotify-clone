@@ -1,37 +1,19 @@
 ---
 import { SongsTable } from '../../components/SongsTable.jsx';
 import Layout from '../../layouts/Layout.astro';
-import { type Playlist } from '../../lib/data';
 import { CardPlayButton } from '../../components/CardPlayButton';
 import { RandomPlayButton } from '../../components/RandomPlayButton';
 import Header from '../../components/Header.astro';
 import { getPlaylist } from '../../services/playlist';
+import sumHours from '../../utils/sumHours';
 
 const { id } = Astro.params;
 
 const playlist = await getPlaylist({ id });
 
-function sumarHoras(array: Playlist[]) {
-  let suma = 0;
-  let result = '';
-
-  for (var i = 0; i < array?.length; i++) {
-    const songs = array[i].songs || [];
-    for (var j = 0; j < songs.length; j++) {
-      const duration = parseInt(songs[j].duration);
-      suma += duration;
-    }
-  }
-
-  if (suma / 60 >= 0) {
-    return (result = Math.round(suma / 60) + 'm');
-  }
-  return (result = Math.round(suma) + 's');
-}
-
 const playlistSongs = playlist?.songs;
 
-const duration = sumarHoras(playlistSongs);
+const duration = sumHours(playlistSongs);
 
 const colorBg = playlist?.color;
 ---

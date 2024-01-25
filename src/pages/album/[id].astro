@@ -6,32 +6,15 @@ import { CardPlayButton } from '../../components/CardPlayButton';
 import { RandomPlayButton } from '../../components/RandomPlayButton';
 import Header from '../../components/Header.astro';
 import { getAlbum } from '../../services/album';
+import sumHours from '../../utils/sumHours';
 
 const { id } = Astro.params;
 
 const album = await getAlbum({ id });
 
-function sumarHoras(array: Album[]) {
-  let suma = 0;
-  let result = '';
-
-  for (var i = 0; i < array?.length; i++) {
-    const songs = array[i].songs || [];
-    for (var j = 0; j < songs.length; j++) {
-      const duration = parseInt(songs[j].duration);
-      suma += duration;
-    }
-  }
-
-  if (suma / 60 >= 0) {
-    return (result = Math.round(suma / 60) + 'm');
-  }
-  return (result = Math.round(suma) + 's');
-}
-
 const albumSongs = album?.songs;
 
-const duration = sumarHoras(albumSongs);
+const duration = sumHours(albumSongs);
 
 const colorBg = album?.color;
 ---
