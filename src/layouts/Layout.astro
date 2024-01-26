@@ -26,7 +26,11 @@ const { title, description } = Astro.props;
   <body>
     <div id='app' class='relative h-screen p-2 gap-2'>
       <aside class='[grid-area:aside] flex-col flex'>
-        <AsideMenu client:load />
+        <AsideMenu
+          client:load
+          transition:name='aside-menu'
+          transition:persist
+        />
       </aside>
       <main class='[grid-area:main] rounded-lg bg-zinc-900 overflow-y-auto'>
         <slot />
