@@ -25,7 +25,6 @@ const colorBg = playlist?.color;
     class={`relative flex flex-col transition-all duration-1000 overflow-x-hidden `}
     transition:name=`playlist ${id} horizontal box`
     style={`background-color: ${colorBg}`}
-    transition:animate={fade({ duration: '0.0001s' })}
   >
     <Header />
     <header
@@ -39,11 +38,15 @@ const colorBg = playlist?.color;
             src={playlist?.imagelink}
             alt={`Cover of ${playlist?.title}`}
             class='object-cover size-full shadow-lg'
+            transition:name=`playlist ${id} image horizontal`
           />
         </picture>
         <div class='flex flex-col gap-3'>
           <span class='text-sm'>Playlist</span>
-          <h1 class='text-xl sm:text-4xl lg:text-6xl font-bold text-white'>
+          <h1
+            class='text-xl sm:text-4xl lg:text-6xl font-bold text-white'
+            transition:name=`playlist ${id} title horizontal`
+          >
             {playlist?.title}
           </h1>
           <span class='mt-3 text-sm'>
