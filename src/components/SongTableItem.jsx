@@ -93,7 +93,11 @@ export function SongTableItem({ song, index, playlist, album }) {
         />
       </td>
       <td className='px-2 sm:px-4 py-2 font-light'>
-        <SongInfo {...song} isPlayingSong={isPlayingSong} />
+        <SongInfo
+          {...song}
+          cover={album ? album.imagelink : playlist.imagelink}
+          isPlayingSong={isPlayingSong}
+        />
       </td>
       <td className='hidden sm:block px-4 py-2 font-light'>{song?.album}</td>
       <td className='c sm:px-4 py-2 font-light rounded-tr-lg rounded-br-lg'>

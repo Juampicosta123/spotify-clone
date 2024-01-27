@@ -1,23 +1,4 @@
-import { getAlbum } from '../services/album';
-import { useEffect, useState } from 'react';
-
-export function SongInfo({ title, artists, isPlayingSong, albumId, id }) {
-  const [album, setAlbum] = useState({});
-  useEffect(() => {
-    const fetchAlbum = async () => {
-      try {
-        const album = await getAlbum({ id: albumId });
-        setAlbum(album);
-      } catch (error) {
-        console.error('Error fetching Album:', error);
-      }
-    };
-
-    fetchAlbum();
-  }, []);
-
-  const cover = album?.imagelink;
-
+export function SongInfo({ title, artists, isPlayingSong, album, cover }) {
   const playingSongClassName = isPlayingSong ? 'text-green-500' : 'text-white';
 
   const artistsString = artists?.join(', ');
@@ -32,7 +13,7 @@ export function SongInfo({ title, artists, isPlayingSong, albumId, id }) {
         ) : (
           <img
             src={cover}
-            alt={`Cover of ${album.title} by ${artistsString}`}
+            alt={`Cover of the playlist by ${artistsString}`}
             className='object-cover size-full rounded-md'
           />
         )}
@@ -44,12 +25,9 @@ export function SongInfo({ title, artists, isPlayingSong, albumId, id }) {
         >
           {title}
         </span>
-        <a
-          href={`/album/${album._id}`}
-          className='text-gray-400 text-xs truncate hover:underline w-max'
-        >
+        <h5 className='text-gray-400 text-xs truncate w-max'>
           {artistsString}
-        </a>
+        </h5>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 import { CardPlayButton } from './CardPlayButton.jsx';
 
 const { playlist } = Astro.props;
+import { fade } from 'astro:transitions';
 
 const { title, imagelink, artists, _id: id } = playlist;
 
@@ -29,13 +30,11 @@ const artistsString = artists.join(', ');
         src={imagelink}
         alt={`Cover of ${title} by ${artistsString}`}
         class='object-cover size-full'
-        transition:name={`playlist ${id} image horizontal`}
       />
     </picture>
 
     <h2
       class='text-white font-semibold truncate'
-      transition:name={`playlist ${id} title horizontal`}
     >
       {title}
     </h2>

@@ -26,15 +26,11 @@ const { album } = Astro.props;
         src={album?.imagelink}
         alt={`Cover of ${album?.title} by ${album?.artistOwner}`}
         class='object-cover w-full h-full rounded-md'
-        transition:name={`album ${album?._id} image square`}
       />
     </picture>
 
     <div class='flex flex-auto flex-col px-2'>
-      <h2
-        transition:name={`album ${album?._id} title square`}
-        class='text-white text-md font-semibold truncate'
-      >
+      <h2 class='text-white text-md font-semibold truncate'>
         {album?.title}
       </h2>
 
