@@ -1,10 +1,30 @@
+[build.processing]
+  skip_processing = false
 [build.processing.css]
-minify = true
-bundle = false
-
+  minify = true
+  bundle = false
 [build.processing.js]
-minify = true
-bundle = false
+  minify = true
+  bundle = false
 
+# Config for the Netlify Build Plugin: netlify-plugin-minify-html
 [[plugins]]
-package = "netlify-plugin-minify-html"
+  package = "netlify-plugin-minify-html"
+
+  # Specify which deploy contexts we'll minify HTML in.
+  # Supports any Deploy Contexts available in Netlify.
+  # https://docs.netlify.com/site-deploys/overview/#deploy-contexts
+  [plugins.inputs]
+    contexts = [
+      'production',
+      'branch-deploy',
+      'deploy-preview'
+    ]
+
+  # Optionally, override the default options for the minification
+  # https://github.com/kangax/html-minifier#options-quick-reference
+  [plugins.inputs.minifierOptions]
+    collapseWhitespace = true
+    conservativeCollapse = true
+    minifyCSS = true
+    minifyJS = true
