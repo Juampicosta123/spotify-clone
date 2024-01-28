@@ -1,5 +1,3 @@
-import axios from "axios";
-
 const API_ENDPOINT = 'https://spotify-clone-api-eight.vercel.app/api'
 
 export const createQueue = async ({ from, fromType, random, songId }) => {
@@ -12,11 +10,19 @@ export const createQueue = async ({ from, fromType, random, songId }) => {
       let queue;
 
       if(songId){
-      const {data} = await axios.post(`${API_ENDPOINT}/queue?song=${songId}`, body)
-      queue = data.data
+      const response = await fetch(`${API_ENDPOINT}/queue?song=${songId}`, {
+      method: "POST",
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(body)
+      }).then(res => res.json())
+      queue = response.data
       } else {
-      const {data} = await axios.post(`${API_ENDPOINT}/queue`, body)
-      queue = data.data
+      const response = await fetch(`${API_ENDPOINT}/queue`, {
+        method: "POST",
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(body)
+        }).then(res => res.json())
+      queue = response.data
       }
       return queue;
     } catch (error) {
@@ -27,8 +33,10 @@ export const createQueue = async ({ from, fromType, random, songId }) => {
 
   export const setNextSong = async ({ id, random }) => {
     try {
-      const { data } = await axios.put(`${API_ENDPOINT}/queue/next-song/${id}?random=${random}`)
-      const queue = data.updated
+      const response = await fetch(`${API_ENDPOINT}/queue/next-song/${id}?random=${random}`, {
+        method: "PUT"        
+      }).then(res => res.json())
+      const queue = response.updated
       return queue;
     } catch (error) {
       console.error('Error fetching queue:', error);
@@ -38,8 +46,9 @@ export const createQueue = async ({ from, fromType, random, songId }) => {
 
   export const setPrevSong = async ({ id }) => {
     try {
-      const { data } = await axios.put(`${API_ENDPOINT}/queue/prev-song/${id}`)
-      const queue = data.updated
+      const response = await fetch(`${API_ENDPOINT}/queue/prev-song/${id}`, {
+        method: "PUT"        }).then(res => res.json())
+      const queue = response.updated
       return queue;
     } catch (error) {
       console.error('Error fetching queue:', error);
@@ -49,10 +58,10 @@ export const createQueue = async ({ from, fromType, random, songId }) => {
 
   export const setRandomQueue = async ({ id }) => {
     try {
-      const { data } = await fetch(`${API_ENDPOINT}/queue/random/${id}`, {
+      const response = await fetch(`${API_ENDPOINT}/queue/random/${id}`, {
         method: 'PUT',
-      })
-        const queue = data.updated
+      }).then(res => res.json())
+        const queue = response.updated
       return queue;
     } catch (error) {
       console.error('Error fetching queue:', error);

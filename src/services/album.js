@@ -1,11 +1,9 @@
-import axios from "axios";
-
 const API_ENDPOINT = 'https://spotify-clone-api-eight.vercel.app/api'
 
 export const getAlbums = async ({ searchQuery = '' }) => {
     try {
-      const {data} = await axios.get(`${API_ENDPOINT}/album?search=${searchQuery}`)
-      const albums = data.data
+      const response = await fetch(`${API_ENDPOINT}/album?search=${searchQuery}`).then(res => res.json())
+      const albums = response.data
       return albums;
     } catch (error) {
       console.error('Error fetching albums:', error);
@@ -15,8 +13,8 @@ export const getAlbums = async ({ searchQuery = '' }) => {
 
   export const getAlbum = async ({ id }) => {
     try {
-      const {data} = await axios.get(`${API_ENDPOINT}/album/${id}`)
-      const album = data.data
+      const response = await fetch(`${API_ENDPOINT}/album/${id}`).then(res => res.json())
+      const album = response.data
       return album;
     } catch (error) {
       console.error('Error fetching album:', error);
