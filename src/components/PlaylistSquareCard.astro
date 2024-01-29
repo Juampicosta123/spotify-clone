@@ -23,6 +23,7 @@ const { album } = Astro.props;
   >
     <picture class='aspect-square w-full h-auto flex-none'>
       <img
+        fetchpriority='high'
         src={album?.imagelink}
         alt={`Cover of ${album?.title} by ${album?.artistOwner}`}
         class='object-cover w-full h-full rounded-md'
