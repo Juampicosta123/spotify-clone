@@ -35,7 +35,7 @@ const recentAlbums = albums?.slice(0, 6);
         }
       </div>
       <h2 class='text-3xl font-bold mt-3'>Creados para tí</h2>
-      <div class='flex flex-wrap mt-6 gap-4'>
+      <div class='flex flex-wrap mt-6 gap-4 pb-3'>
         {
           recentAlbums?.map((album: Album) => (
             <PlaylistSquareCard album={album} />
