@@ -13,7 +13,7 @@ const { album } = Astro.props;
       group-hover:translate-y-0 group-hover:opacity-100
       z-10'
   >
-    <CardPlayButton album={album} playlist={null} client:visible />
+    <CardPlayButton client:visible album={album} playlist={null} client:visible />
   </div>
 
   <a

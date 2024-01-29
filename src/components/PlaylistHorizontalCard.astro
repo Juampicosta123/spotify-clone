@@ -18,7 +18,12 @@ const artistsString = artists.join(', ');
   group-hover:translate-y-0 group-hover:opacity-100
   z-10'
   >
-    <CardPlayButton album={null} playlist={playlist} client:load />
+    <CardPlayButton
+      client:visible
+      album={null}
+      playlist={playlist}
+      client:load
+    />
   </div>
   <a
     href={`/playlist/${id}`}
