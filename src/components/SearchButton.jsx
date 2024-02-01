@@ -8,7 +8,7 @@ export const SearchButton = ({ search }) => {
         onChange={search}
         type='text'
         placeholder='Buscar en tu biblioteca'
-        className='bg-zinc-800 w-[300px] h-[30px] px-1 group-hover:bg-zinc-700 focus:outline-none text-sm font-normal'
+        className='bg-zinc-800 w-[150px] h-[20px] sm:w-[300px] sm:h-[30px] px-1 group-hover:bg-zinc-700 focus:outline-none text-sm font-normal'
       />
     </div>
   );

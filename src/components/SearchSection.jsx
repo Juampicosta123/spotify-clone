@@ -91,9 +91,7 @@ export const SearchSection = () => {
               {loadingSongs &&
                 new Array(4)
                   .fill(null)
-                  .map((index) => (
-                    <SearchSongSkeleton key={crypto.randomUUID()} />
-                  ))}
+                  .map(() => <SearchSongSkeleton key={crypto.randomUUID()} />)}
               {songs.length === 0 && !loadingSongs && (
                 <h5>No se encontraron canciones!</h5>
               )}
@@ -135,7 +133,6 @@ export const SearchSection = () => {
                       >
                         <picture class='aspect-square w-full h-auto flex-none'>
                           <img
-                            fetchpriority='high'
                             src={playlist?.imagelink}
                             alt={`Cover of ${playlist?.title} by ${playlist?.artistOwner}`}
                             class='object-cover w-full h-full rounded-md'
@@ -194,7 +191,6 @@ export const SearchSection = () => {
                       >
                         <picture class='aspect-square w-full h-auto flex-none'>
                           <img
-                            fetchpriority='high'
                             src={album?.imagelink}
                             alt={`Cover of ${album?.title} by ${album?.artistOwner}`}
                             class='object-cover w-full h-full rounded-md'
