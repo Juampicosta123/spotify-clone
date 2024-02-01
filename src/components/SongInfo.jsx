@@ -1,4 +1,4 @@
-export function SongInfo({ title, artists, isPlayingSong, album, cover }) {
+export function SongInfo({ title, artists, isPlayingSong, imagelink }) {
   const playingSongClassName = isPlayingSong ? 'text-green-500' : 'text-white';
 
   const artistsString = artists?.join(', ');
@@ -8,12 +8,12 @@ export function SongInfo({ title, artists, isPlayingSong, album, cover }) {
       className={`playlist-item flex relative overflow-hidden items-center gap-4 rounded-md`}
     >
       <picture className='size-11 flex-none'>
-        {!cover ? (
+        {!imagelink ? (
           <div className='bg-zinc-700 size-4' />
         ) : (
           <img
-            src={cover}
-            alt={`Cover of the playlist by ${artistsString}`}
+            src={imagelink}
+            alt={`Cover of the song by ${artistsString}`}
             className='object-cover size-full rounded-md'
           />
         )}

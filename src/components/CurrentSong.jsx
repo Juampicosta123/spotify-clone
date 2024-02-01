@@ -1,25 +1,4 @@
-import { usePlayerStore } from '../store/playerStore';
-import { getAlbum } from '../services/album';
-import { useEffect, useState } from 'react';
-
-export const CurrentSong = ({ title, artists, albumId }) => {
-  const [imagelink, setImagelink] = useState('');
-  const queue = usePlayerStore((state) => state.queue);
-
-  useEffect(() => {
-    const fetchAlbum = async () => {
-      try {
-        if (albumId) {
-          const data = await getAlbum({ id: albumId });
-          setImagelink(data?.imagelink);
-        }
-      } catch (error) {
-        console.error('Error fetching Album:', error);
-      }
-    };
-
-    fetchAlbum();
-  }, [queue]);
+export const CurrentSong = ({ title, artists, imagelink }) => {
 
   const artistsString = artists?.join(', ');
   return (

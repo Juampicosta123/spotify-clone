@@ -111,7 +111,6 @@ export function Player() {
       <div className='w-full flex items-center'>
         <CurrentSong
           {...queue?.currentSong}
-          albumId={queue?.currentSong?.albumId}
         />
       </div>
       <div className='grid place-content-center gap-4 flex-1'>

@@ -47,7 +47,7 @@ export const AsideMenu = () => {
             <HomeIcon className='size-6' />
             <span className='hidden lg:block'>Inicio</span>
           </SideMenuItem>
-          <SideMenuItem name='search' href='/#' className='gap-5'>
+          <SideMenuItem name='search' href='/search' className='gap-5'>
             <SearchIcon className='size-6' />
             <span className='hidden lg:block'>Buscar</span>
           </SideMenuItem>

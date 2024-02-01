@@ -1,7 +1,12 @@
 import { Pause } from '../icons/Pause';
 import { Play } from '../icons/Play';
 
-export function SongTableItemPlayButton({ isHovered, isPlayingItem }) {
+export function SongTableItemPlayButton({
+  isHovered,
+  isPlayingItem,
+  size = 4,
+  className
+}) {
   return (
     <div
       style={{
@@ -9,9 +14,9 @@ export function SongTableItemPlayButton({ isHovered, isPlayingItem }) {
       }}
     >
       {isPlayingItem ? (
-        <Pause className='w-4 h-4 text-white' />
+        <Pause className={`size-${size} text-white ${className}`} />
       ) : (
-        <Play className='w-4 h-4 text-white' />
+        <Play className={`size-${size} text-white ${className}`} />
       )}
     </div>
   );

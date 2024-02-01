@@ -1,8 +1,8 @@
 const API_ENDPOINT = 'https://spotify-clone-api-eight.vercel.app/api'
 
-export const getPlaylists = async ({ searchQuery = '' }) => {
+export const getPlaylists = async ({ searchQuery = '', page = 1, limit = 7  }) => {
     try {
-      const response = await fetch(`${API_ENDPOINT}/playlist?search=${searchQuery}`).then(res => res.json())
+      const response = await fetch(`${API_ENDPOINT}/playlist?search=${searchQuery}&page=${page}&limit=${limit}`).then(res => res.json())
 
       const playlists = response.data
 
