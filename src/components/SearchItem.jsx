@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { usePlayerStore } from '../store/playerStore';
 import { formatTime } from '../utils/formatTime';
 import { SongSearchInfo } from './SongSearchInfo';
-import { createQueue } from '@/services/queue';
+import { createQueue } from '../services/queue';
 
 export const SearchItem = ({ song }) => {
   const [isPlayingSong, setIsPlayingSong] = useState(false);
